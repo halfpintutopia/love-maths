@@ -61,8 +61,10 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0]
     if (isCorrect) {
         alert(`Hey! You got it right :D`)
+        incrementScore()
     } else {
         alert(`Awww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}`)
+        incrementWrongAnswer()
     }
 
     runGame(calculatedAnswer[1])
@@ -86,10 +88,35 @@ function calculateCorrectAnswer() {
     }
 }
 
+/**
+ * Gets the correct score from the DOM and increments it by 1
+ */
 function incrementScore() {
+    // Interrogate the HTML
+    // textContent gets the content of all elements, including <script> and <style> elements. In contrast, innerText only shows "human-readable"
+    // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
+    /*
+    The reason that we're putting the  double plus signs before the variable
+    instead of after is quite interesting. If you  put the double plus signs after the variable
+    then JavaScript will do something like this.  It will get the ID of score, and it will set
+    the inner text to the old score variable, and then it will add one to old score.
+    The result is that we never see the score being  updated. Because it's been written back to the
+    dom before it has had one added to it. Putting  the double plus signs before the variable means
+    that JavaScript will get the ID of score,  then set the inner text to one plus old score.
+    So we see our score being updated. It's just  an interesting little thing that sometimes you
+    have to take into account, as to put  the double plus before or after the variable.
+     */
+    let oldScore = parseInt(document.getElementById('score').innerText)
+    document.getElementById('score').innerText = ++oldScore // compound addition operator
 }
 
+/**
+ * Gets the correct incorrect score from the DOM and increments it by 1
+ */
 function incrementWrongAnswer() {
+    // Interrogate the HTML
+    let oldIncorrectScore = parseInt(document.getElementById('incorrect').innerText)
+    document.getElementById('incorrect').innerText = ++oldIncorrectScore
 }
 
 function displayAdditionQuestion(operand1, operand2) {
