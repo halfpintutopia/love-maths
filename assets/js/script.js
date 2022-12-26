@@ -166,7 +166,15 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 function displayDivisionQuestion(operand1, operand2) {
-    document.getElementById('operand-1').textContent = operand1
+    /*
+    REMEMBER
+    So rather than just diving in  and starting to write code immediately.
+    Just stop and think for a while. Write it  out or sketch out how your game will work,
+    and then start coding each step,  testing your values along the way.
+    Finally, when you're happy, you've  tested it, and your solution works.
+     */
+
+    document.getElementById('operand-1').textContent = operand1 * operand2
     document.getElementById('operand-2').textContent = operand2
     document.getElementById('operator').textContent = "/"
 }
