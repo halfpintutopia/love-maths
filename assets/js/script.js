@@ -42,12 +42,23 @@ function runGame(gameType) {
     let num1 = Math.floor(Math.random() * 25) + 1
     let num2 = Math.floor(Math.random() * 25) + 1
 
-    if (gameType === 'addition') {
-        displayAdditionQuestion(num1, num2)
-    } else {
-        alert(`Unknown game type: ${gameType}`)
-        // In console
-        throw `Unknown game type: ${gameType}. Aborting!`
+    switch (gameType) {
+        case 'addition':
+            displayAdditionQuestion(num1, num2)
+            break
+        case 'subtract':
+            displaySubtractQuestion(num1, num2)
+            break
+        case 'multiply':
+            displayMultiplyQuestion(num1, num2)
+            break
+        case 'division':
+            displayDivisionQuestion(num1, num2)
+            break
+        default:
+            alert(`Unknown game type: ${gameType}`)
+            // In console
+            throw `Unknown game type: ${gameType}. Aborting!`
     }
 }
 
@@ -80,11 +91,18 @@ function calculateCorrectAnswer() {
     let operand2 = parseInt(document.getElementById('operand-2').innerText)
     let operator = document.getElementById('operator').innerText
 
-    if (operator === "+") {
-        return [operand1 + operand2, 'addition']
-    } else {
-        alert(`Unimplemented operator ${operator}`)
-        throw `Unimplemented operator ${operator}. Aborting!`
+    switch(operator) {
+        case '+':
+            return [operand1 + operand2, 'addition']
+        case '-':
+            return [operand1 - operand2, 'subtract']
+        case 'x':
+            return [operand1 * operand2, 'multiply']
+        case '/':
+            return [operand1 / operand2, 'division']
+        default:
+            alert(`Unimplemented operator ${operator}`)
+            throw `Unimplemented operator ${operator}. Aborting!`
     }
 }
 
@@ -126,11 +144,20 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+"
 }
 
-function displaySubtractQuestion() {
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1
+    document.getElementById('operand-2').textContent = operand2
+    document.getElementById('operator').textContent = "-"
 }
 
-function displayMultiplyQuestion() {
+function displayMultiplyQuestion(operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1
+    document.getElementById('operand-2').textContent = operand2
+    document.getElementById('operator').textContent = "x"
 }
 
-function displayDivisionQuestion() {
+function displayDivisionQuestion(operand1, operand2) {
+    document.getElementById('operand-1').textContent = operand1
+    document.getElementById('operand-2').textContent = operand2
+    document.getElementById('operator').textContent = "/"
 }
